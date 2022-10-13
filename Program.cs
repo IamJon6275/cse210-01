@@ -7,7 +7,7 @@ namespace Cse210Starter
     {
         static void Main(string[] args)
         {
-            // Program: Tic-Tack-Toe
+            // Program: Tic-Tac-Toe
             // Author: Jonathan Wells
             // Write your code here
             List<string> board = new List<string>();
@@ -17,11 +17,13 @@ namespace Cse210Starter
                 board.Add(i.ToString());
             }
             
+            int count = 0;
             int input;
             string player;
             string gameOver = "no";
             while (gameOver == "no")
             {
+                count ++;
                 WriteBoard(board);
                 Console.Write("x's turn to choose a square (1-9): ");
                 player = "x";
@@ -32,12 +34,18 @@ namespace Cse210Starter
 
                 if (gameOver == "no")
                 {
+                    count ++;
                     Console.Write("o's turn to choose a square (1-9): ");
                     player = "o";
                     input = int.Parse(Console.ReadLine());
                     board[input-1] = player;
                     gameOver = WinCheck(board, player);
                     WriteBoard(board);
+                        if (gameOver == "no" && count == 9)
+                        {
+                            gameOver = "yes";
+                            Console.WriteLine("Cat's game, no winners this time.");
+                        }
                 }
             }
 
